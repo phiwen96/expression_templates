@@ -1,6 +1,6 @@
 
 
-file(GLOB HEADER_LIST "${PROJECT_SOURCE_DIR}/include/${CMAKE_PROJECT_NAME}/*.hpp")
+file(GLOB_RECURSE HEADER_LIST "${PROJECT_SOURCE_DIR}/include/${CMAKE_PROJECT_NAME}/*.hpp")
 file(GLOB SOURCE_LIST ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 # foreach(file ${CMAKE_SOURCE_DIR}/include/${CMAKE_PROJECT_NAME}/concepts)
@@ -22,10 +22,28 @@ add_library (${self} STATIC
 #                PREFIX "Magic\\Sources"
 #                FILES  ${CONCEPTS_LIST}
 # )
-foreach (file ${PROJECT_SOURCE_DIR}/include/${self}/concepts)
-    target_sources (${self} PRIVATE ${file})
-    source_group("Header Files" FILES ${file})
-endforeach ()
+# foreach (file ${PROJECT_SOURCE_DIR}/include/${self}/concepts)
+#     target_sources (${self} PRIVATE ${file})
+    # source_group(TREE ${PROJECT_SOURCE_DIR} PREFIX kiss\\bajs FILES ${file})
+# endforeach ()
+
+file (GLOB concept_headers ${PROJECT_SOURCE_DIR}/include/expression_templates/concepts/*.hpp)
+# get_target_property(sources ${self} ${concept_headers})
+foreach(file ${concept_headers})
+target_sources (${self} PUBLIC ${file})
+get_target_property(sources ${self} ${file})
+source_group(TREE "${CMAKE_PROJECT_SOURCE_DIR}"
+PREFIX "Implementation"               
+FILES  ${file}
+)
+endforeach()
+
+# source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}"
+# PREFIX "Implementation"               
+# FILES  ${sources}
+# )
+
+
 
 foreach (file ${PROJECT_SOURCE_DIR}/include/${self}/operators/comparison)
     target_sources (${self} PRIVATE ${file})
