@@ -5,7 +5,6 @@
 //using namespace std;
 /**
  bool = types <int, char, string> | identical
- 
  */
 
 struct A{};
