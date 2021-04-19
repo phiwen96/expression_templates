@@ -1,66 +1,13 @@
-
-
 file(GLOB_RECURSE HEADER_LIST "${PROJECT_SOURCE_DIR}/include/${CMAKE_PROJECT_NAME}/*.hpp")
 file(GLOB SOURCE_LIST ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
-# foreach(file ${CMAKE_SOURCE_DIR}/include/${CMAKE_PROJECT_NAME}/concepts)
-#     source_group ("${CMAKE_PROJECT_NAME}/Header Files/concepts" FILES ${file})
-#     # message (${file})
-# endforeach()
-
-
 set (self ${PROJECT_NAME})
-
-
 
 add_library (${self} STATIC 
 	${SOURCE_LIST}  ${HEADER_LIST} 
 )
-# file(GLOB_RECURSE CONCEPTS_LIST include/parser/concepts/*.hpp)
-
-# source_group(TREE   ${CMAKE_CURRENT_SOURCE_DIR}
-#                PREFIX "Magic\\Sources"
-#                FILES  ${CONCEPTS_LIST}
-# )
-# foreach (file ${PROJECT_SOURCE_DIR}/include/${self}/concepts)
-#     target_sources (${self} PRIVATE ${file})
-    # source_group(TREE ${PROJECT_SOURCE_DIR} PREFIX kiss\\bajs FILES ${file})
-# endforeach ()
-
-# foreach(file ${HEADER_LIST})
-#     source_group(TREE include/${self}
-#         PREFIX "headers"               
-#         FILES  ${file}
-#     )
-# endforeach()
-
-# foreach(file ${HEADER_LIST})
-#     source_group(TREE include/${self}
-#         PREFIX "headers"               
-#         FILES  ${file}
-#     )
-# endforeach()
 
 ph_IDE ()
-
-
-
-# source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}"
-# PREFIX "Implementation"               
-# FILES  ${sources}
-# )
-
-
-
-# foreach (file ${PROJECT_SOURCE_DIR}/include/${self}/operators/comparison)
-#     target_sources (${self} PRIVATE ${file})
-#     source_group("Header Files" FILES ${file})
-# endforeach ()
-
-
-
-# source_group (TREE ${PROJECT_SOURCE_DIR} FILES ${CONCEPTS_LIST})
-
 
 ph_precompile (TARGET ${self} PUBLIC PCH ${std_pch})
 
