@@ -16,8 +16,14 @@ struct expression <types_container <types...>, transformer>
 {
     using type = typename transformer::template transform <types_container, types...>;
     
-    constexpr operator auto () {
+    constexpr operator auto ()
+    {
         return type {};
+    }
+    
+    constexpr operator bool ()
+    {
+        return transformer::template value <types_container, types...>;
     }
 };
 

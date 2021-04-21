@@ -28,6 +28,12 @@ auto run () -> int
  
     
     auto a0 = types <A, char, int, A, int> | distinct;
+    
+    if (types <A, char, int> | distinct)
+    {
+        std::cout << "yaay" << std::endl;
+    }
+    
     auto e0 = type <int> ;
 }
 
