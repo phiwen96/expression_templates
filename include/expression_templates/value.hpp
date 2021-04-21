@@ -13,4 +13,4 @@ struct __value
 
 
 template <decltype (auto) t>
-constexpr __value <std::forward <decltype (t)> (t)> value {};
+constexpr auto value = __value <std::forward <decltype (t)> (t)> {};

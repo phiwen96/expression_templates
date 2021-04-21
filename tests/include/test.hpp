@@ -3,6 +3,7 @@
 #include <expression_templates/type.hpp>
 #include <expression_templates/types.hpp>
 #include <expression_templates/value.hpp>
+#include <expression_templates/operators/comparison/distinct.hpp>
 //using namespace std;
 /**
  bool = types <int, char, string> | identical
@@ -17,12 +18,13 @@ auto run () -> int
 {
     
     
-    constexpr auto d = value <(a)>;
+    
+    auto d = value <(a)>;
     
     A aa = d.value;
     
     std::cout << std::is_same_v <decltype (d.value), A const&> << std::endl;
-//    constexpr auto a0 = types <A, char, int> | ;
+    constexpr auto a0 = types <A, char, int> | distinct;
     auto e0 = type <int> ;
 }
 
