@@ -1,40 +1,39 @@
 #pragma once
-
-
-
-template <typename...>
-struct __imp_distinct;
-
-
-template <typename T>
-struct __imp_distinct <T>
-{
-    using type = T;
-    static constexpr bool value = true;
-};
-
-template <typename T, typename U, typename... V>
-struct __imp_distinct <T, U, V...>
-{
-//    using type = T;
-    static constexpr bool value = true;
-};
-
-
+#include "../../types.hpp"
 
 
 struct __distinct
 {
+private:
+    template <typename...>
+    struct __imp;
+
+
+
+    template <typename T>
+    struct __imp <T>
+    {
+        template <template <typename...> typename B, typename... A>
+        using type = std::conditional_t <has_type <A...>::template value <T>, B <A...>, B <A..., T>>;
+    };
+
+
+    template <typename T, typename... U>
+    struct __imp <T, U...>
+    {
+        template <template <typename...> typename B, typename... A>
+        using type = std::conditional_t <has_type <A...>::template value <T>, typename __imp <U...>::template type <B, A...>, typename __imp <U...>::template type <B, A..., T>>;
+    };
+    
+public:
     template <template <typename...> typename T, typename... U>
-    using transform = T <U...>;
+    using transform = typename __imp <U...>::template type <T>;
 };
+
+
 
 
 
 
 constexpr auto distinct = __distinct {};
 
-
-
-//template <template <typename...> typename T, typename... U>
-//auto operator | ()

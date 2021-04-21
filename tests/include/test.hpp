@@ -14,17 +14,20 @@ struct A{};
 
 constexpr A a;
 
+
+
+
+
+
+
 auto run () -> int 
 {
+//    lol (__types <double, double, int> {});
+
+//    std::cout << __imp_distinct <int, double, char, std::string, char>::value << std::endl;
+ 
     
-    
-    
-    auto d = value <(a)>;
-    
-    A aa = d.value;
-    
-    std::cout << std::is_same_v <decltype (d.value), A const&> << std::endl;
-    constexpr auto a0 = types <A, char, int> | distinct;
+    auto a0 = types <A, char, int, A, int> | distinct;
     auto e0 = type <int> ;
 }
 
